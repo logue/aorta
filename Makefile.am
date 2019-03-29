@@ -1,5 +1,7 @@
 AUTOMAKE_OPTIONS=foreign
 
+ACLOCAL_AMFLAGS = -I m4
+
 if MAKE_WINDOWS
 bin_PROGRAMS = Aorta
 else
@@ -16,11 +18,8 @@ aorta_SOURCES = aorta.cpp aorta.h \
 	Filter.cpp Filter.h FloatImage.cpp FloatImage.h \
 	imagdds.cpp imagdds.h image_ext.cpp image_ext.h
 
-aorta_LDADD = \
-	-lsquish
+aorta-resources.o: $(srcdir)/aorta.rc
+	@WX_RESCOMP@ -i $^ -O coff -o $@
 
-Aorta_LDADD = $(aorta_LDADD) aorta-resources.o
+Aorta_LDADD = aorta-resources.o
 Aorta_SOURCES = $(aorta_SOURCES)
-
-aorta-resources.o: aorta.rc
-	@WX_RESCOMP@ -o aorta-resources.o -I$(srcdir) $(srcdir)/aorta.rc

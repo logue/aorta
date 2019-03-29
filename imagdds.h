@@ -9,7 +9,7 @@
 #ifndef IMAGDDS_H_
 #define IMAGDDS_H_
 
-#include "wx/image.h"
+#include <wx/image.h>
 
 #define wxIMAGE_OPTION_DDS_USE_MIPMAPS wxT("DdsMipmap")
 #define wxIMAGE_OPTION_DDS_FORMAT wxT("DdsFormat")
@@ -84,15 +84,15 @@ struct DDSURFACEDESC2
 class wxDDSHandler : public wxImageHandler
 {
 public:
-    enum {
-	wxBITMAP_TYPE_DDS = wxBITMAP_TYPE_ANY + 1
+    enum wxBitmapType {
+		wxBITMAP_TYPE_DDS = wxBITMAP_TYPE_ANY + 1
     };
     
     wxDDSHandler() 
 	{
 	    m_name = _T("Direct Draw Surface file");
 	    m_extension = _T("dds");
-	    m_type = wxBITMAP_TYPE_DDS;
+		m_type = wxBITMAP_TYPE_ANY;
 	}
 #if wxUSE_STREAMS
     virtual bool SaveFile ( wxImage *image, wxOutputStream& stream, bool verbose=true );

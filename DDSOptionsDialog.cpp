@@ -22,23 +22,23 @@
 #include "DDSOptionsDialog.h"
 
 DDSOptionsDialog::DDSOptionsDialog(const wxString& prefix, bool HasAlpha)
-	: wxDialog(NULL, -1, wxT("DDS Options"), wxDefaultPosition, wxDefaultSize), m_prefix(prefix), m_hasAlpha(HasAlpha)
+	: wxDialog(NULL, -1, _("DDS Options"), wxDefaultPosition, wxDefaultSize), m_prefix(prefix), m_hasAlpha(HasAlpha)
 {
 
-	mipmapBox_staticbox = new wxStaticBox(this, -1, wxT("Mipmap Halo Removal"));
+	mipmapBox_staticbox = new wxStaticBox(this, -1, _("Mipmap Halo Removal"));
 	useDXTC = new wxCheckBox(this, -1, wxT("Use DXTC (Texture Compression)"));
 	generateMipmaps = new wxCheckBox(this, BUTTON_GenerateMipmaps, wxT("Generate Mipmaps"));
 	wxArrayString filterChoices;
-	filterChoices.Add(wxT("Box"));
-	filterChoices.Add(wxT("Triangle"));
-	filterChoices.Add(wxT("Kaiser"));
+	filterChoices.Add(_("Box"));
+	filterChoices.Add(_("Triangle"));
+	filterChoices.Add(_("Kaiser"));
 	mipmapFilterChoice = new wxChoice(this, -1, wxDefaultPosition, wxDefaultSize, filterChoices);
 
-	repeatingTexture = new wxCheckBox(this, -1, wxT("Image Repeats"));
+	repeatingTexture = new wxCheckBox(this, -1, _("Image Repeats"));
 
-	colorFillBackground = new wxCheckBox(this, BUTTON_ColorFillBackground, wxT("Fast Halo Removal"));
-	reconstructColors = new wxCheckBox(this, BUTTON_ReconstructColors, wxT("Reconstruct Edge Colors"));
-	chooseBackground = new wxButton(this, BUTTON_ChooseBackground, wxT("Choose Background Color..."));
+	colorFillBackground = new wxCheckBox(this, BUTTON_ColorFillBackground, _("Fast Halo Removal"));
+	reconstructColors = new wxCheckBox(this, BUTTON_ReconstructColors, _("Reconstruct Edge Colors"));
+	chooseBackground = new wxButton(this, BUTTON_ChooseBackground, _("Choose Background Color..."));
 
 	fill_from_prefs();
 	update_enablement();
@@ -128,16 +128,16 @@ void DDSOptionsDialog::do_layout()
 	wxBoxSizer* chooseBackgroundIndenter = new wxBoxSizer(wxHORIZONTAL);
 	mipmapFilterSizer->Add(new wxStaticText(this, -1, wxT("Filter:")), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
 	mipmapFilterSizer->Add(mipmapFilterChoice, 1, wxALIGN_CENTER_VERTICAL | wxEXPAND);
-	topSizer->Add(useDXTC, 0, wxALL |wxADJUST_MINSIZE, 10);
-	topSizer->Add(generateMipmaps, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxADJUST_MINSIZE, 10);
-	mipmapSizer->Add(repeatingTexture, 0, wxRIGHT|wxLEFT|wxBOTTOM | wxADJUST_MINSIZE|wxEXPAND, 10);
-	mipmapSizer->Add(mipmapFilterSizer, 0, wxRIGHT|wxLEFT|wxBOTTOM| wxADJUST_MINSIZE | wxEXPAND, 10);
-	mipmapIndenter->Add(20, 20, 0, wxADJUST_MINSIZE, 1);
-	mipmapBox->Add(colorFillBackground, 0, wxALL|wxADJUST_MINSIZE, 10);
-	colorFillIndenter->Add(20, 20, 0, wxADJUST_MINSIZE, 0);
-	colorFillBox->Add(reconstructColors, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxADJUST_MINSIZE, 10);
-	chooseBackgroundIndenter->Add(20, 20, 0, wxADJUST_MINSIZE, 0);
-	chooseBackgroundIndenter->Add(chooseBackground, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxADJUST_MINSIZE, 10);
+	topSizer->Add(useDXTC, 0, wxALL |wxFIXED_MINSIZE, 10);
+	topSizer->Add(generateMipmaps, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxFIXED_MINSIZE, 10);
+	mipmapSizer->Add(repeatingTexture, 0, wxRIGHT|wxLEFT|wxBOTTOM | wxFIXED_MINSIZE|wxEXPAND, 10);
+	mipmapSizer->Add(mipmapFilterSizer, 0, wxRIGHT|wxLEFT|wxBOTTOM| wxFIXED_MINSIZE | wxEXPAND, 10);
+	mipmapIndenter->Add(20, 20, 0, wxFIXED_MINSIZE, 1);
+	mipmapBox->Add(colorFillBackground, 0, wxALL|wxFIXED_MINSIZE, 10);
+	colorFillIndenter->Add(20, 20, 0, wxFIXED_MINSIZE, 0);
+	colorFillBox->Add(reconstructColors, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxFIXED_MINSIZE, 10);
+	chooseBackgroundIndenter->Add(20, 20, 0, wxFIXED_MINSIZE, 0);
+	chooseBackgroundIndenter->Add(chooseBackground, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxFIXED_MINSIZE, 10);
 	colorFillBox->Add(chooseBackgroundIndenter, 1, wxEXPAND, 0);
 	colorFillIndenter->Add(colorFillBox, 1, wxEXPAND, 0);
 	mipmapBox->Add(colorFillIndenter, 1, wxEXPAND, 0);
